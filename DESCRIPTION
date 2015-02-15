@@ -1,0 +1,9 @@
+Package: dcR
+Type: Package
+Title: Dimensional Charting in R
+Version: 0.0.1
+Date: 2015-02-15
+Author: Hiroaki Yutani
+Maintainer: Hiroaki Yutani <yutani.ini@gmail.com>
+Description: R bindings for dc.js
+License: MIT
