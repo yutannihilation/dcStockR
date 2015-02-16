@@ -5,7 +5,8 @@
 #' @import htmlwidgets
 #'
 #' @export
-dc <- function(data, dimension, group, xlim = NULL, width = NULL, height = NULL) {
+dc <- function(data, dimension, group, groupLabel, geom = "barChart",
+               xlim = NULL, width = NULL, height = NULL) {
   
   if(is.null(xlim)) xlim <- range(data[dimension])
   
@@ -18,7 +19,8 @@ dc <- function(data, dimension, group, xlim = NULL, width = NULL, height = NULL)
     data = data,
     params = params,
     dimensionFnc = getJS_dimensionFnc(dimension),
-    groupFnc     = getJS_dimensionFnc(group)
+    groupFnc     = getJS_dimensionFnc(group),
+    geom         = geom
   )
 
   # create widget
@@ -27,7 +29,7 @@ dc <- function(data, dimension, group, xlim = NULL, width = NULL, height = NULL)
     x,
     width = width,
     height = height,
-    package = 'dcR'
+    package = 'dcStockR'
   )
 }
 
@@ -35,7 +37,7 @@ dc <- function(data, dimension, group, xlim = NULL, width = NULL, height = NULL)
 #'
 #' @export
 dcOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'dc', width, height, package = 'dcR')
+  shinyWidgetOutput(outputId, 'dc', width, height, package = 'dcStockR')
 }
 
 #' Widget render function for use in Shiny

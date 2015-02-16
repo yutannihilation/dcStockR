@@ -1,4 +1,4 @@
-Package: dcR
+Package: dcStockR
 Type: Package
 Title: Dimensional Charting in R
 Version: 0.0.1

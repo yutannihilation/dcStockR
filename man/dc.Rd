@@ -4,7 +4,8 @@
 \alias{dc}
 \title{Dimensional Charting in R}
 \usage{
-dc(data, dimension, group, xlim = NULL, width = NULL, height = NULL)
+dc(data, dimension, group, groupLabel, geom = "barChart", xlim = NULL,
+  width = NULL, height = NULL)
 }
 \description{
 R bindings for dc.js

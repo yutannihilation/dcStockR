@@ -12,3 +12,7 @@ dependencies:
   src: htmlwidgets/lib/dcjs
   script: dc.min.js
   style: dc.css
+- name: dcStock
+  version: 1.7.3
+  src: htmlwidgets/lib
+  script: stock.js
