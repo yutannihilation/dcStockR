@@ -6,7 +6,7 @@ dependencies:
 - name: crossfilter
   version: 1.3.11
   src: htmlwidgets/lib/crossfilter
-  script: crossfilter.min.js
+  script: crossfilter.js
 - name: dcjs
   version: 2.1.0
   src: htmlwidgets/lib/dcjs

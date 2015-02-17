@@ -4,13 +4,14 @@
 #'
 #' @import htmlwidgets
 #' @importFrom htmltools tags
+#' @importFrom digest digest
 #'
 #' @export
-dc <- function(data, chartRecipe = "yearlyBubbleChart", xlim = NULL, width = NULL, height = NULL) {
+dc <- function(data, chartRecipe = "yearlyBubbleChart", width = NULL, height = NULL) {
   x <- list(
-    data = data,
-    chartRecipe = chartRecipe,
-    xlim = xlim
+    data        = data,
+    datahash    = digest(data),
+    chartRecipe = chartRecipe
   )
   # create widget
   htmlwidgets::createWidget(

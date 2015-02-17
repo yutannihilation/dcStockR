@@ -3,32 +3,25 @@
 /* jshint globalstrict: true */
 /* global dc,d3,crossfilter,colorbrewer */
 
-var dcStock = function(data, chartRecipe, divId, width, height) {
+var dcStock = function(datahash, chartRecipe, divId, width, height) {    
     var dateFormat = d3.time.format('%Y-%m-%d');
     var numberFormat = d3.format('.2f');
 
-    data.forEach(function(d) {
-        d.dd = dateFormat.parse(d.date);
-        d.month = d3.time.month(d.dd);
-        d.close = +d.close;
-        d.open = +d.open;
-    });
-
-
-    var dd_extent = d3.extent(data, function(d) {
-        return d.dd;
-    });
     var radius = Math.min(width, height) / 2;
 
     var divElem = document.querySelector('#' + divId);
-
-    var ndx = crossfilter(data);
+        
+    var ndx = window.__ndx[datahash];
     var all = ndx.groupAll();
-
-    var yearlyDimension = ndx.dimension(function(d) {
+    
+    
+    if(!window.__dimension['yearlyDimension' + datahash]) {
+      window.__dimension['yearlyDimension' + datahash] = ndx.dimension(function(d) {
         return d3.time.year(d.dd).getFullYear();
-    });
-
+      });
+    }
+    var yearlyDimension = window.__dimension['yearlyDimension' + datahash];
+    
     var yearlyPerformanceGroup = yearlyDimension.group().reduce(
         function(p, v) {
             ++p.count;
@@ -62,14 +55,22 @@ var dcStock = function(data, chartRecipe, divId, width, height) {
             };
         }
     );
-
-    var dateDimension = ndx.dimension(function(d) {
+    
+    if(!window.__dimension['dateDimension' + datahash]) {
+      window.__dimension['dateDimension' + datahash] = ndx.dimension(function(d) {
         return d.dd;
-    });
+      });
+    }
+    var dateDimension = window.__dimension['dateDimension' + datahash];
 
-    var moveMonths = ndx.dimension(function(d) {
+    var dd_extent = [dateDimension.bottom(1)[0].dd, dateDimension.top(1)[0].dd];
+    
+    if(!window.__dimension['moveMonths' + datahash]) {
+      window.__dimension['moveMonths' + datahash] = ndx.dimension(function(d) {
         return d.month;
-    });
+      });
+    }
+    var moveMonths = window.__dimension['moveMonths' + datahash];
 
     var monthlyMoveGroup = moveMonths.group().reduceSum(function(d) {
         return Math.abs(d.close - d.open);
@@ -100,21 +101,29 @@ var dcStock = function(data, chartRecipe, divId, width, height) {
             };
         }
     );
-
-    var gainOrLoss = ndx.dimension(function(d) {
+    
+    if(!window.__dimension['gainOrLoss' + datahash]) {
+      window.__dimension['gainOrLoss' + datahash] = ndx.dimension(function(d) {
         return d.open > d.close ? 'Loss' : 'Gain';
-    });
+      });
+    }
+    var gainOrLoss = window.__dimension['gainOrLoss' + datahash];
 
     var gainOrLossGroup = gainOrLoss.group();
 
 
-    var fluctuation = ndx.dimension(function(d) {
+    if(!window.__dimension['fluctuation' + datahash]) {
+      window.__dimension['fluctuation' + datahash] = ndx.dimension(function(d) {
         return Math.round((d.close - d.open) / d.open * 100);
-    });
+      });
+    }
+    var fluctuation = window.__dimension['fluctuation' + datahash];
+    
     var fluctuationGroup = fluctuation.group();
 
 
-    var quarter = ndx.dimension(function(d) {
+    if(!window.__dimension['quarter' + datahash]) {
+      window.__dimension['quarter' + datahash] = ndx.dimension(function(d) {
         var month = d.dd.getMonth();
         if (month <= 2) {
             return 'Q1';
@@ -125,17 +134,23 @@ var dcStock = function(data, chartRecipe, divId, width, height) {
         } else {
             return 'Q4';
         }
-    });
+      });
+    }
+    var quarter = window.__dimension['quarter' + datahash];
+    
     var quarterGroup = quarter.group().reduceSum(function(d) {
         return d.volume;
     });
 
-
-    var dayOfWeek = ndx.dimension(function(d) {
+    if(!window.__dimension['dayOfWeek' + datahash]) {
+      window.__dimension['dayOfWeek' + datahash] = ndx.dimension(function(d) {
         var day = d.dd.getDay();
         var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         return day + '.' + name[day];
-    });
+      });
+    }
+    var dayOfWeek = window.__dimension['dayOfWeek' + datahash];
+    
     var dayOfWeekGroup = dayOfWeek.group();
 
     if (chartRecipe == "yearlyBubbleChart") {
