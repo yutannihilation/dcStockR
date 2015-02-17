@@ -5,6 +5,7 @@
 #' @import htmlwidgets
 #' @importFrom htmltools tags
 #' @importFrom digest digest
+#' @importFrom htmlwidgets createWidget
 #'
 #' @export
 dc <- function(data, chartRecipe = "yearlyBubbleChart", title = NULL,
@@ -16,7 +17,7 @@ dc <- function(data, chartRecipe = "yearlyBubbleChart", title = NULL,
     title       = title
   )
   # create widget
-  htmlwidgets::createWidget(
+  createWidget(
     name = 'dc',
     x,
     width = width,
@@ -28,7 +29,7 @@ dc <- function(data, chartRecipe = "yearlyBubbleChart", title = NULL,
 #' Widget output function for use in Shiny
 #'
 #' @export
-dcOutput <- function(outputId, width = '100%', height = '400px'){
+dcOutput <- function(outputId, width = '100%', height = '300px'){
   shinyWidgetOutput(outputId, 'dc', width, height, package = 'dcStockR')
 }
 

@@ -4,7 +4,7 @@
 \alias{dcOutput}
 \title{Widget output function for use in Shiny}
 \usage{
-dcOutput(outputId, width = "100\%", height = "400px")
+dcOutput(outputId, width = "100\%", height = "300px")
 }
 \description{
 Widget output function for use in Shiny
