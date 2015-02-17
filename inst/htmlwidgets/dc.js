@@ -14,7 +14,7 @@ HTMLWidgets.widget({
       window.__dimension = {};
     }
     
-    window.onload = function(x) {
+    window.onload = function() {
       dc.renderAll();
     }
 

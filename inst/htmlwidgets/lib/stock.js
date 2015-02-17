@@ -467,7 +467,7 @@ var dcStock = function(datahash, chartRecipe, divElem, width, height) {
             .debug(true);
     */
 
-    //dc.renderAll();
+    dc.renderAll();
     /*
 
     dc.renderAll('group');
