@@ -7,3 +7,7 @@ Author: Hiroaki Yutani
 Maintainer: Hiroaki Yutani <yutani.ini@gmail.com>
 Description: R bindings for dc.js
 License: MIT
+Imports:
+  htmlwidgets
+Suggests:
+  knitr
