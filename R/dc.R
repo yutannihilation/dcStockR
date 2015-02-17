@@ -3,26 +3,15 @@
 #' R bindings for dc.js
 #'
 #' @import htmlwidgets
+#' @importFrom htmltools tags
 #'
 #' @export
-dc <- function(data, dimension, group, groupLabel, geom = "barChart",
-               xlim = NULL, width = NULL, height = NULL) {
-  
-  if(is.null(xlim)) xlim <- range(data[dimension])
-  
-  params <- list(
-    x         = getJS_Scale(xlim)
-  )
-
-  # forward options using x
+dc <- function(data, chartRecipe = "yearlyBubbleChart", xlim = NULL, width = NULL, height = NULL) {
   x <- list(
     data = data,
-    params = params,
-    dimensionFnc = getJS_dimensionFnc(dimension),
-    groupFnc     = getJS_dimensionFnc(group),
-    geom         = geom
+    chartRecipe = chartRecipe,
+    xlim = xlim
   )
-
   # create widget
   htmlwidgets::createWidget(
     name = 'dc',
@@ -47,3 +36,12 @@ renderDc <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, dcOutput, env, quoted = TRUE)
 }
+
+dc_html <- function(id, style, class, ...) {
+    list(
+      tags$div(tags$a(
+        "reset", class="reset", href="javascript:dc.filterAll();dc.redrawAll();", style="display: none;"
+        ), id = id, class = class, style = style),
+      tags$div(class = "clearfix")
+    )
+  }

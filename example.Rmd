@@ -1,0 +1,67 @@
+---
+title: "dcStockR Test"
+author: "Hiroaki Yutani"
+date: "2/17/2015"
+output: html_document
+---
+
+This should be same as the original charts of ["Nasdaq 100 Index 1985/11/01-2012/06/29"](http://dc-js.github.io/dc.js/)
+
+```{r}
+library(dcStockR)
+library(httr)
+library(lubridate)
+```
+
+# Get from dc-js's repo.
+
+```{r, cache=TRUE}
+res <- GET("https://github.com/dc-js/dc.js/raw/master/web/ndx.csv")
+ndx <- content(res, type = "text/csv")
+ndx$date <- as.character(mdy(ndx$date))
+```
+
+# yearlyBubbleChart
+```{r}
+dc(ndx, "yearlyBubbleChart")
+```
+
+# gainOrLossChart
+```{r}
+dc(ndx, "gainOrLossChart")
+```
+
+# quarterChart
+```{r}
+dc(ndx, "quarterChart")
+```
+
+# dayOfWeekChart
+
+```{r}
+dc(ndx, "dayOfWeekChart")
+```
+
+# fluctuationChart
+
+```{r}
+dc(ndx, "fluctuationChart")
+```
+
+# moveChart
+
+```{r}
+dc(ndx, "moveChart")
+```
+
+# dataCount
+
+```{r}
+dc(ndx, "dataCount")
+```
+
+# dataTable
+
+```{r}
+dc(ndx, "dataTable")
+```
