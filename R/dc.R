@@ -7,11 +7,13 @@
 #' @importFrom digest digest
 #'
 #' @export
-dc <- function(data, chartRecipe = "yearlyBubbleChart", width = NULL, height = NULL) {
+dc <- function(data, chartRecipe = "yearlyBubbleChart", title = NULL,
+               width = NULL, height = NULL) {
   x <- list(
     data        = data,
     datahash    = digest(data),
-    chartRecipe = chartRecipe
+    chartRecipe = chartRecipe,
+    title       = title
   )
   # create widget
   htmlwidgets::createWidget(
@@ -39,10 +41,10 @@ renderDc <- function(expr, env = parent.frame(), quoted = FALSE) {
 }
 
 dc_html <- function(id, style, class, ...) {
-    list(
-      tags$div(tags$a(
-        "reset", class="reset", href="javascript:dc.filterAll();dc.redrawAll();", style="display: none;"
-        ), id = id, class = class, style = style),
-      tags$div(class = "clearfix")
-    )
-  }
+  list(
+    tags$div(
+      tags$strong(class = "title"),
+      tags$a("reset", class="reset", href="javascript:dc.filterAll();dc.redrawAll();", style="display: none;"),
+      id = id, class = class, style = style)
+  )
+}

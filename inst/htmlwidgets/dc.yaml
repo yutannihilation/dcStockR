@@ -20,3 +20,5 @@ dependencies:
   version: 2.1.0
   src: htmlwidgets/lib
   script: stock.js
+  style: stock.css
+

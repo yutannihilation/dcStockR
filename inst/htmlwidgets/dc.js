@@ -39,7 +39,12 @@ HTMLWidgets.widget({
       window.__ndx[x.datahash] = crossfilter(data);
     }
     
-    dcStock(x.datahash, x.chartRecipe, el.id, el.offsetWidth, el.offsetHeight);
+    var maybe_title = el.getElementsByClassName('title');
+    if(maybe_title.length == 1) {
+      maybe_title[0].textContent = x.title;
+    }
+    
+    dcStock(x.datahash, x.chartRecipe, el, el.offsetWidth - 20, el.offsetHeight - 20);
   },
 
   resize: function(el, width, height, instance) {

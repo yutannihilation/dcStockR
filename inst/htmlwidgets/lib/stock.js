@@ -3,18 +3,17 @@
 /* jshint globalstrict: true */
 /* global dc,d3,crossfilter,colorbrewer */
 
-var dcStock = function(datahash, chartRecipe, divId, width, height) {    
+var dcStock = function(datahash, chartRecipe, divElem, width, height) {    
     var dateFormat = d3.time.format('%Y-%m-%d');
     var numberFormat = d3.format('.2f');
 
     var radius = Math.min(width, height) / 2;
 
-    var divElem = document.querySelector('#' + divId);
+    var divId = divElem.id;
         
     var ndx = window.__ndx[datahash];
     var all = ndx.groupAll();
-    
-    
+
     if(!window.__dimension['yearlyDimension' + datahash]) {
       window.__dimension['yearlyDimension' + datahash] = ndx.dimension(function(d) {
         return d3.time.year(d.dd).getFullYear();

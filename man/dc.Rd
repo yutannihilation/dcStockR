@@ -4,7 +4,8 @@
 \alias{dc}
 \title{Dimensional Charting in R}
 \usage{
-dc(data, chartRecipe = "yearlyBubbleChart", width = NULL, height = NULL)
+dc(data, chartRecipe = "yearlyBubbleChart", title = NULL, width = NULL,
+  height = NULL)
 }
 \description{
 R bindings for dc.js

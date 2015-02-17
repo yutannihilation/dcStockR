@@ -13,7 +13,7 @@ library(httr)
 library(lubridate)
 ```
 
-# Get from dc-js's repo.
+Get data from dc-js's repo.
 
 ```{r, cache=TRUE}
 res <- GET("https://github.com/dc-js/dc.js/raw/master/web/ndx.csv")
@@ -21,47 +21,31 @@ ndx <- content(res, type = "text/csv")
 ndx$date <- as.character(mdy(ndx$date))
 ```
 
-# yearlyBubbleChart
+Draw charts.
+
 ```{r}
-dc(ndx, "yearlyBubbleChart")
-```
+# yearlyBubbleChart
+
+dc(ndx, "yearlyBubbleChart", title = "Yearly Performance (radius: fluctuation/index ratio, color: gain/loss)")
 
 # gainOrLossChart
-```{r}
-dc(ndx, "gainOrLossChart")
-```
+dc(ndx, "gainOrLossChart", title = "Days by Gain/Loss", height = 300)
 
 # quarterChart
-```{r}
-dc(ndx, "quarterChart")
-```
+dc(ndx, "quarterChart", title = "Quarters", height = 300)
 
 # dayOfWeekChart
-
-```{r}
-dc(ndx, "dayOfWeekChart")
-```
+dc(ndx, "dayOfWeekChart", title = "Day of Week", height = 300)
 
 # fluctuationChart
-
-```{r}
-dc(ndx, "fluctuationChart")
-```
+dc(ndx, "fluctuationChart", title = "Days by Fluctuation(%)", height = 300)
 
 # moveChart
-
-```{r}
-dc(ndx, "moveChart")
-```
+dc(ndx, "moveChart", title = "Monthly Index Abs Move & Volume/500,000 Chart")
 
 # dataCount
-
-```{r}
 dc(ndx, "dataCount")
-```
 
 # dataTable
-
-```{r}
 dc(ndx, "dataTable")
 ```
