@@ -8,7 +8,7 @@
 #' @importFrom htmlwidgets createWidget
 #'
 #' @export
-dc <- function(data, chartRecipe = c("yearlyBubbleChart",　"gainOrLossChart",　"quarterChart",　"dayOfWeekChart",　"fluctuationChart",　"moveChart",　"dataCount",　"dataTable"), title = NULL,
+dc <- function(data, chartRecipe = c("yearlyBubbleChart", "gainOrLossChart", "quarterChart", "dayOfWeekChart", "fluctuationChart", "moveChart", "dataCount", "dataTable"), title = NULL,
                width = NULL, height = NULL) {
   x <- list(
     data        = data,
