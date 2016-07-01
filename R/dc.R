@@ -8,8 +8,10 @@
 #' @importFrom htmlwidgets createWidget
 #'
 #' @export
-dc <- function(data, chartRecipe = c("yearlyBubbleChart",　"gainOrLossChart",　"quarterChart",　"dayOfWeekChart",　"fluctuationChart",　"moveChart",　"dataCount",　"dataTable"), title = NULL,
+dc <- function(data, chartRecipe = c("yearlyBubbleChart",　"test123",　"quarterChart",　"dayOfWeekChart",　"fluctuationChart",　"moveChart",　"dataCount",　"dataTable"), title = NULL,
                width = NULL, height = NULL) {
+               
+               # "gainOrLossChart",
   x <- list(
     data        = data,
     datahash    = digest(data),
